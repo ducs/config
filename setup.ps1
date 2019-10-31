@@ -8,9 +8,9 @@
 
     try {
       
-      . (".\Utilities.ps1")
-      . (".\Install.ps1")
-      . (".\Config.ps1")
+      . .\Utilities.ps1
+      . .\Install.ps1
+      . .\Config.ps1
 
     }
     catch {
@@ -33,10 +33,10 @@
       Write-Host("Enter Choice:")
       switch (Read-Host)
       {
-        0 {InstallApps($Levels[0])}
-        1 {InstallApps($Levels[1])}
-        2 {InstallApps($Levels[2])}
-        3 {InstallApps($Levels[3])}
+        0 {InstallApps($SetupOptions[0])}
+        1 {InstallApps($SetupOptions[1])}
+        2 {InstallApps($SetupOptions[2])}
+        3 {InstallApps($SetupOptions[3])}
         4 {SetupAndConfig}
         5 {IndividualInstall}
         6 {InstallFonts}
