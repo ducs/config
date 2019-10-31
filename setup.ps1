@@ -17,7 +17,7 @@
       Write-Host("Error loading dependencies")
     }
     
-    CheckChocolatlyInstalled
+    # CheckChocolatlyInstalled
 
     function ShowMainOptions
     {
