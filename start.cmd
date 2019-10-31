@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass Desktop\Install.ps1
+powershell.exe -ExecutionPolicy Setup.ps1
