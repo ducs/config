@@ -326,7 +326,7 @@ Function Install-Font {
         #$Font
         try {
             Copy $Font "C:\Windows\Fonts"
-            New-ItemProperty -Name $Font.BaseName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $Font.name
+            New-ItemProperty -Name $Font.BaseName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $Font.name  | out-null
         }
         catch {
             Write-Host ('Error Installing font: {0}' -f $Font.BaseName)
@@ -342,7 +342,7 @@ function InstallFonts
     Get-ChildItem "$env:TEMP\EssentialFonts.zip" | Expand-Archive -DestinationPath "$env:TEMP\EssentialFonts" -Force
     
 
-    if([System.IO.Directory]::Exists()){
+    if([System.IO.Directory]::Exists("$env:TEMP\EssentialFonts")){
         
         Install-Font "$env:TEMP\EssentialFonts" -Recurse
         
