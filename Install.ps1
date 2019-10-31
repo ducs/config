@@ -1,6 +1,3 @@
-. .\Utilities.ps1
-
-
 $SetupOptions = 
     (
         "0",
@@ -230,7 +227,7 @@ $AppArray =
         $levelapps | foreach {Write-Host($_[2])}
         # Write-Host($LevelApps.Length)
 
-        $LevelApps  | foreach {InstallApps($_)}
+        $LevelApps  | foreach {InstallApp($_)}
 
        
     }
@@ -262,17 +259,6 @@ function IndividualInstall
     Write-Host("Finished Invidual App Install")
 }
 
-
-
-
-
-
-#### BEGIN LOGIG ######
-
-    #5
-    
-
-
 $dismAppList = ""
 
 function InstallWindowsFeatures
@@ -283,7 +269,6 @@ function InstallWindowsFeatures
         & choco install $app /y /source windowsfeatures | Write-Output
     }
 }
-
 
 function InstallFonts
 {
@@ -299,5 +284,3 @@ function InstallFonts
     Write-Host("Finished Installing Fonts")
     ShowMainOptions
 }
-
-
