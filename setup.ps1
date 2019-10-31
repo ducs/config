@@ -1,23 +1,27 @@
-﻿
+﻿Write-Host("Checking for dependencies before starting")
 
+#Download & Install dependencies
 
+    if(-not [System.IO.File]::Exists("Utilities.ps1")){ Start-BitsTransfer -Asynchronous "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
+    if(-not [System.IO.File]::Exists("Install.ps1")){ Start-BitsTransfer -Asynchronous "https://raw.githubusercontent.com/jeremyhart/config/master/Install.ps1" }
+    if(-not [System.IO.File]::Exists("Config.ps1")){ Start-BitsTransfer -Asynchronous "https://raw.githubusercontent.com/jeremyhart/config/master/Config.ps1" }
 
+    try {
+      
+      . (".\Utilities.ps1")
+      . (".\Install.ps1")
+      . (".\Config.ps1")
 
-#Download & Install depencent
-
-    #
-
-    if(-not [System.IO.File]::Exists("Utilities.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
-    if(-not [System.IO.File]::Exists("Install.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Install.ps1" }
-    if(-not [System.IO.File]::Exists("Config.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Config.ps1" }
-
-    . .\Utilities.ps1
-    . .\Install.ps1
-    . .\Config.ps1
+    }
+    catch {
+      Write-Host("Error loading dependencies")
+    }
     
     CheckChocolatlyInstalled
 
-    Write-Host("======== SELECT OPTIONS ========")
+    function ShowMainOptions
+    {
+      Write-Host("======== SELECT OPTIONS ========")
     Write-Host("")
 
       foreach($l in $SetupOptions)
@@ -40,8 +44,9 @@
         default 
         { 
             Write-Host("You must select an option")
-            #need to loop back here
-             
+          
         }
       }
-      exit
+    }
+
+    ShowMainOptions

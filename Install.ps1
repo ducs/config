@@ -258,6 +258,7 @@ function IndividualInstall
     {
         Write-Host("Selected an App fromt he list thickshit")
     }
+    Write-Host("Finished Invidual App Install")
 }
 
 
@@ -293,6 +294,8 @@ function InstallFonts
         Write-Host("Install git first")
         exit
     }
+
+    Write-Host("Finished Installing Fonts")
 }
 
 

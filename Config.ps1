@@ -20,6 +20,7 @@ $ConfigArray =
                 Write-Host("Error Setting Config: {0}" -f $c[0])
             }
         }
+        Write-Host("Finished Settings & Config")
     }
 
 
