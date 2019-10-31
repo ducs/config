@@ -1,3 +1,3 @@
-curl -O https://raw.githubusercontent.com/jeremyhart/config/master/setup.ps1
-powershell.exe -ExecutionPolicy setup.ps1
+curl -O https://raw.githubusercontent.com/jeremyhart/config/master/start.cmd
+start powershell.exe -ExecutionPolicy unrestricted setup.ps1
 del %0

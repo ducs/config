@@ -1,17 +1,21 @@
-﻿. .\Utilities.ps1
-. .\Install.ps1
-. .\Config.ps1
+﻿
 
 
 
 
 #Download & Install depencent
 
-    #CheckChocolatlyInstalled
+    #
 
     if(-not [System.IO.File]::Exists("Utilities.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
     if(-not [System.IO.File]::Exists("Install.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Install.ps1" }
     if(-not [System.IO.File]::Exists("Config.ps1")){ Start-BitsTransfer "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
+
+    . .\Utilities.ps1
+    . .\Install.ps1
+    . .\Config.ps1
+    
+    CheckChocolatlyInstalled
 
     Write-Host("======== SELECT OPTIONS ========")
     Write-Host("")
