@@ -296,6 +296,7 @@ function InstallFonts
     }
 
     Write-Host("Finished Installing Fonts")
+    ShowMainOptions
 }
 
 

@@ -8,22 +8,6 @@ $ConfigArray =
             $function:ReplacePowerShellWithCMD
         )
 
-
-
-    function SetupAndConfig
-    {
-        foreach($c in $ConfigArray)
-        {
-            Write-Host("Setting Config: {0}" -f $c)
-            if(!(& $c[1]))
-            {
-                Write-Host("Error Setting Config: {0}" -f $c[0])
-            }
-        }
-        Write-Host("Finished Settings & Config")
-    }
-
-
 function DisableUAC
 {
    
@@ -36,3 +20,23 @@ function ReplacePowerShellWithCMD
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name DontUsePowerShellOnWinX -Value 1 -Type DWord 
     return $false
 }
+
+function SetupAndConfig
+    {
+        foreach($c in $ConfigArray)
+        {
+            Write-Host("Setting Config: {0}" -f $c)
+            try
+            {
+                if(!(& $c[1]))
+                {
+                    Write-Host("Error Setting Config: {0}" -f $c[0])
+                }
+            }catch
+            {
+                Write-Host("Error Setting Config: {0}" -f $c[0])
+            }
+        }
+        Write-Host("Finished Settings & Config")
+        ShowMainOptions
+    }
