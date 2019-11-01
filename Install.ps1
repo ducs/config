@@ -31,6 +31,11 @@ $SetupOptions =
     ),
     (
         "6",
+        "Set Individual Settings",
+        "Control Freak"
+    ),
+    (
+        "7",
         "Install Essential Fonts",
         ""
     ),
@@ -115,35 +120,33 @@ function IndividualInstall
 
     foreach($a in $SortedAppArray)
     {
-        # if($i -le 9)
-        # {
-        #     $s=" "
-        # }else
-        # {
-        #     $s=""
-        # }
-
-        # $s = IIF($i -le 9,  " " , "")
         
-
         Write-Host("{0}:{2} {1}" -f $i, $a[1], ('',' ')[$i -le 9])
         $i++
     }
-    # Write-Host("x:  Exit")
+    Write-Host("x:  Return to Main Menu")
+    
+    $r = Read-Host
 
-    [int]$i = Read-Host
-    if($i -le [int]$AppArray.Length)
-    {
-        InstallApp($SortedAppArray[$i])
-    }else
-    {
-        Write-Host("Selected an App fromt he list thickshit")
+    if($r -eq "x"){ShowMainOptions}
+
+    if($null -eq $r){
+        [int]$i = $r
+        if($i -le [int]$AppArray.Length)
+        {
+            InstallApp($SortedAppArray[$i])
+        }else
+        {
+            Write-Host("Selected an App from the list thickshit")
+        }
+        Write-Host("Finished Installing {0}" -f $SortedAppArray[$i][1])
+        ShowMainOptions
+    }else{
+        IndividualInstall
     }
-    Write-Host("Finished Installing {0}" -f $SortedAppArray[$i][1])
-    ShowMainOptions
-}
 
-$dismAppList = ""
+    
+}
 
 function InstallWindowsFeatures
 {

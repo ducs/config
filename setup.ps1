@@ -3,10 +3,10 @@
 #Download & Install dependencies
 #make sure all files are latest
 
-    if(-not [System.IO.File]::Exists("Utilities.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
-    if(-not [System.IO.File]::Exists("AppList.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/AppList.ps1" }
-    if(-not [System.IO.File]::Exists("Install.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Install.ps1" }
-    if(-not [System.IO.File]::Exists("Config.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Config.ps1" }
+    # if(-not [System.IO.File]::Exists("Utilities.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Utilities.ps1" }
+    # if(-not [System.IO.File]::Exists("AppList.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/AppList.ps1" }
+    # if(-not [System.IO.File]::Exists("Install.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Install.ps1" }
+    # if(-not [System.IO.File]::Exists("Config.ps1")){ Start-BitsTransfer  "https://raw.githubusercontent.com/jeremyhart/config/master/Config.ps1" }
 
     try {
       
@@ -20,8 +20,7 @@
       Write-Host("Error loading dependencies")
     }
     
-   CheckChocolatlyInstalled
-
+   #CheckChocolatlyInstalled
     function ShowMainOptions
     {
       Write-Host("======== SELECT OPTIONS ========")
@@ -42,7 +41,8 @@
         3 {InstallApps($SetupOptions[3])}
         4 {SetupAndConfig}
         5 {IndividualInstall}
-        6 {InstallFonts}
+        6 {SetIndividualSettings}
+        7 {InstallFonts}
         'x' {exit}
         default 
         { 

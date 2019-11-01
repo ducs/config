@@ -1,36 +1,33 @@
-﻿function DownloadFile
-{
-    
+﻿Function IIf($If, $Right, $Wrong) {If ($If) {$Right} Else {$Wrong}}
+# function DownloadFile
+# {
+#     $url = "https://github.com/git-for-windows/git/releases/download/v2.23.0.windows.1/Git-2.23.0-64-bit.exe"
+#     $dest = "$env:USERPROFILE\SetupTmp\"
+#     $start_time = Get-Date
+#     if(![System.IO.File]::Exists($dest)){
+#     # file with path $path doesn't exist
+#         [System.IO.Directory]::CreateDirectory($dest)
 
-    
-    $url = "https://github.com/git-for-windows/git/releases/download/v2.23.0.windows.1/Git-2.23.0-64-bit.exe"
-    $dest = "$env:USERPROFILE\SetupTmp\"
-    $start_time = Get-Date
-    if(![System.IO.File]::Exists($dest)){
-    # file with path $path doesn't exist
-        [System.IO.Directory]::CreateDirectory($dest)
+#     }
 
-    }
+#     Import-Module BitsTransfer
 
-    Import-Module BitsTransfer
+#     #Start-BitsTransfer -Source $url -Destination $dest -Asynchronous
+#     #Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
-    #Start-BitsTransfer -Source $url -Destination $dest -Asynchronous
-    #Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+#     $Job = Start-BitsTransfer -Source $url -Destination $dest -Asynchronous
 
+#     while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
+#             { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
 
-    $Job = Start-BitsTransfer -Source $url -Destination $dest -Asynchronous
+#     Switch($Job.JobState)
+#     {
+#         "Transferred" {Complete-BitsTransfer -BitsJob $Job}
+#         "Error" {$Job | Format-List } # List the errors.
+#         default {"Other action"} #  Perform corrective action.
+#     }
 
-    while (($Job.JobState -eq "Transferring") -or ($Job.JobState -eq "Connecting")) `
-            { sleep 5;} # Poll for status, sleep for 5 seconds, or perform an action.
-
-    Switch($Job.JobState)
-    {
-        "Transferred" {Complete-BitsTransfer -BitsJob $Job}
-        "Error" {$Job | Format-List } # List the errors.
-        default {"Other action"} #  Perform corrective action.
-    }
-
-}
+# }
 
 
 function AddToPath
@@ -72,4 +69,64 @@ function Unzip
     param([string]$zipfile, [string]$outpath)
 
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+}
+
+
+function Test-RegistryValue()
+{
+    param (
+        [parameter(Mandatory=$true)]
+        [string]$Path,
+
+        [parameter(Mandatory=$false)]
+        [string]$Name
+    )
+
+    $key = Get-Item -LiteralPath $Path -ErrorAction SilentlyContinue
+    if($null -eq $key){return $false}
+    if($null -eq $Name )
+    {
+        if($null -eq $key){ return $false }else{ return $true }
+
+    }else{
+        
+        return $true
+    }
+}
+
+
+function UpdateRegistry
+{
+    param (
+        [parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]$Path,
+        
+        [parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]$Name,
+
+        [parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]$Value,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('String','ExpandString','Binary','DWord','MultiString','Qword','Unknown')]
+        [string[]]$PropertyType
+    )
+
+
+    if(Test-RegistryValue -Path $Path -Name $Name){
+        Set-ItemProperty -Path $Path -Name $Name  -Value $Value 
+        return Test-RegistryValue -Path $Path -Name $Name
+    }else
+    {
+        if(Test-RegistryValue -Path $Path){
+            New-ItemProperty -Path $Path -Name $Name -Value $Value 
+        }else{
+            New-Item -Path $Path
+            New-ItemProperty -Path $Path -Name $Name -Value $Value 
+            return Test-RegistryValue -Path $Path -Name $Name
+        }
+
+    }
+
+
 }
