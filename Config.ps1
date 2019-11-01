@@ -19,8 +19,7 @@ $ConfigArray =
         (
             'Disable Telemetry',
             $function:DisableTelemetry
-        )
-        ,
+        ),
         (
             'Disable Windows 10 Adds',
             $function:DisableAdds
