@@ -1,6 +1,10 @@
 . .\Utilities.ps1
 $ConfigArray = 
         (
+            'Default Config - Disable UAC, Replace Powershell, Enable Remote Desktop Disable Cortana & Disable Telemetry',
+            $function:DefaultConfig
+        ),
+        (
             'Disable UAC',
             $function:DisableUAC
         ),
@@ -29,7 +33,7 @@ $ConfigArray =
             $fumction:DisableLiveTiles
         ),
         (
-            'Increase taskbar transparency',
+            'Increase Taskbar Transparency',
             $function:IncreaseTransprancy
         ),
         (
@@ -100,8 +104,15 @@ function EnableRemoteDesktop
     Get-NetFirewallRule -DisplayName "Remote Desktop*" | Set-NetFirewallRule -enabled true
 }
 
+function DefaultConfig
+{
+    & DisableUAC
+    & ReplacePowerShellWithCMD
+    & EnableRemoteDesktop
+    & DisableCortana
+    & DisableTelemetry
 
-
+}
 
 function SetIndividualSettings
 {
