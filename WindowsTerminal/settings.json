@@ -11,7 +11,7 @@
     {
         "defaults":
         {
-            
+            // Put settings here that you want to apply to all profiles.
         },
         "list":
         [
@@ -47,7 +47,7 @@
 		        "acrylicOpacity" : 0.75,
 		        "closeOnExit" : true,
 		        "colorScheme" : "One Half Dark",
-		        "commandline" : "bash.exe",
+		        "commandline" : "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
 		        "cursorColor" : "#FFFFFF",
 		        "cursorShape" : "bar",
 		        "fontFace" : "Input",
@@ -60,7 +60,24 @@
 		        "snapOnInput" : true,
 		        "startingDirectory" : "%USERPROFILE%",
 		        "useAcrylic" : true
-		    }
+		    },
+             {
+                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                 "hidden": false,
+                 "name": "Ubuntu-20.04",
+                 "source": "Windows.Terminal.Wsl",
+                "acrylicOpacity" : 0.75,
+                "closeOnExit" : true,
+                "colorScheme" : "One Half Dark",
+                "commandline" : "bash.exe",
+                "cursorColor" : "#FFFFFF",
+                "cursorShape" : "bar",
+                "fontFace" : "Input",
+                "fontSize" : 12,
+                "useAcrylic" : true,
+                "padding" : "0, 0, 0, 0",
+                "snapOnInput" : true
+             }
         ]
     },
 
@@ -75,6 +92,6 @@
        
         { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
         { "command": "newTab", "keys": "ctrl+t" },
-        { "command": "closeTab", "keys": "ctrl+w" }
+        { "command": "closeTab", "keys": "ctrl+shift+w" }
     ]
 }
